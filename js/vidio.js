@@ -13,20 +13,45 @@ const loadCategories = async () => {
   }
 };
 
+// load categories videos category_id way functionally start
+const loadCategoriesVideos = id => {
+  const loadCategories = async () => {
+    try {
+      const res = await fetch(
+        `https://openapi.programming-hero.com/api/phero-tube/category/${id}`
+      );
+      const data = await res.json();
+      displayVideos(data.category);
+    } catch (error) {
+      console.error('something is wrong ', error);
+    }
+  };
+  loadCategories();
+};
+// load categories videos category_id way functionally end
+
+// fetch(`https://openapi.programming-hero.com/api/phero-tube/category/${id}`)
+//   .then(res => res.json())
+//   .then(data => displayVideos(data.category));
+
 // category: 'Music';
 // category_id: '1001';
 
 // display categories
 const displayCategories = categories => {
-  const categoriesContainer = document.getElementById('categories-contanier');
+  const categoriesContainer = document.getElementById('categories-container');
   categories.forEach(element => {
     console.log(element);
 
     // create element
-    const button = document.createElement('button');
-    button.classList = ' btn navbar-center';
-    button.innerText = element.category; /* category: 'Music'; */
-    categoriesContainer.appendChild(button);
+    const buttonContainer = document.createElement('div');
+    buttonContainer.innerHTML = `
+    <button onclick ="loadCategoriesVideos(${element.category_id})" class ="btn">
+    ${element.category}
+    </button>
+    `;
+    /* category: 'Music'; */
+    categoriesContainer.appendChild(buttonContainer);
   });
 };
 // load categories end
@@ -76,6 +101,22 @@ function timeFormat(time) {
 // display Videos start
 const displayVideos = videos => {
   const videosContainer = document.getElementById('videos');
+
+  // no content condition start
+  if (videos.length === 0) {
+    videosContainer.classList.remove('grid');
+    videosContainer.innerHTML = `
+    <div class ="min-h-[400px] 2xl:min-h-[650px] flex flex-col justify-center items-center gap-7 w-full">
+      <img src="/images/icon.png" alt="" />
+      <p class =" font-bold text-center text-4xl">Oops!! Sorry, There is no <br /> content here </p>
+    </div>
+    `;
+  } else {
+    videosContainer.innerHTML = ''; /*videos container clear */
+    videosContainer.classList.add('grid');
+  }
+  // no content condition end
+
   videos.forEach(video => {
     console.log(video);
     const card = document.createElement('div');
