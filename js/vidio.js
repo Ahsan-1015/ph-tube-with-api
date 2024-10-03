@@ -71,21 +71,35 @@ const displayVideos = videos => {
     const card = document.createElement('div');
     card.classList = ' card card-compact bg-base-100 ';
     card.innerHTML = ` 
-     <figure class = "h-[200px]">
+     <figure class = "h-[200px] relative">
     <img class ="w-full h-full object-cover"
       src="${video.thumbnail}"
       alt="Shoes" />
+      ${
+        video.others.posted_date?.length === 0
+          ? ''
+          : `<p class ="absolute right-2 bottom-2 bg-black text-white text-xs p-1 rounded">${timeFormat(
+              video.others.posted_date
+            )}</p>`
+      }
+      
   </figure>
   <div class="py-4 flex gap-4">
     <div>
-      <img class ="w-10 h-10 rounded-full object-cover" src="${video.authors[0].profile_picture}" alt="" />
+      <img class ="w-10 h-10 rounded-full object-cover" src="${
+        video.authors[0].profile_picture
+      }" alt="" />
     </div>
 
     <div class ="space-y-1">
       <h3 class ="font-bold text-xl">${video.title}</h3>
       <div class ="flex items-center gap-3">
         <p class ="text-gray-400">${video.authors[0].profile_name}</p>
-        <img class="w-5" src="https://img.icons8.com/?size=48&id=D9RtvkuOe31p&format=png" alt="" />
+        ${
+          video.authors[0].verified === true
+            ? '<img class="w-5" src="https://img.icons8.com/?size=48&id=D9RtvkuOe31p&format=png" alt="" />'
+            : ''
+        }
       </div>
       <p class ="text-gray-400">${video.others.views} views </p>
     </div>
