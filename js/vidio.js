@@ -63,7 +63,17 @@ const videoDemo = {
   description:
     "Dive into the rhythm of 'Shape of You,' a captivating track that blends pop sensibilities with vibrant beats. Created by Olivia Mitchell, this song has already gained 100K views since its release. With its infectious melody and heartfelt lyrics, 'Shape of You' is perfect for fans looking for an uplifting musical experience. Let the music take over as Olivia's vocal prowess and unique style create a memorable listening journey.",
 };
+// time format function start
+function timeFormat(time) {
+  const hour = parseInt(time / 3600);
+  let secondRemaining = parseInt(time % 3600);
+  const minute = parseInt(secondRemaining / 60);
+  secondRemaining = parseInt(minute % 60);
+  return `${hour} hour ${minute} minute ${secondRemaining} second ago`;
+}
+// time format function end
 
+// display Videos start
 const displayVideos = videos => {
   const videosContainer = document.getElementById('videos');
   videos.forEach(video => {
@@ -109,8 +119,7 @@ const displayVideos = videos => {
     videosContainer.appendChild(card);
   });
 };
-
-// loadVideos section end
+// display Videos end
 
 // calling function
 loadCategories();
