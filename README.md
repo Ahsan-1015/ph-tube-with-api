@@ -1,5 +1,5 @@
 <p align="center">
-<img src="(https://github.com/ProgrammingHero1/ph-tube-resources/blob/main/Logo.png)"  />
+<img src="images/logo.png"  />
 </p>
 <p align="center" style="font-size: 24px;">
   PH Tube is a web-based video streaming application where users can browse and watch videos sorted by categories such as music, comedy, and tutorials.
